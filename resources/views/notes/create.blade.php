@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col">
         <div class="jumbotron">
-            <h1 class="display-4" style="padding-right: 40%; margin-block: 23px;">انشاء ملاحظة</h1>
+            <h1 class="display-4" style="padding-right: 40%; margin-block: 23px;font-weight:bold;">انشاء ملاحظة</h1>
             <a class="btn btn-success" href="{{route('notes')}}"> جميع الملاحظات</a>
            </div>
       </div>
