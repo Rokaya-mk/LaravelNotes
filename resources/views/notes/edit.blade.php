@@ -39,7 +39,7 @@
             </div>
             <div class="form-group" style="text-align: left">
 
-                <button class="btn btn-danger" type="submit">تعديل</button>
+                <button class="btn btn-danger" type="submit">تعديل </button>
             </div>
 
           </form>

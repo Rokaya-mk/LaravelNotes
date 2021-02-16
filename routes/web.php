@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/notes', 'App\Http\Controllers\Web\NoteController@index' )->name('notes');
+
 Route::get('/note/create', 'App\Http\Controllers\Web\NoteController@create' )->name('note.create');
 Route::post('/note/store', 'App\Http\Controllers\Web\NoteController@store' )->name('note.store');
 Route::get('/note/show/{id}', 'App\Http\Controllers\Web\NoteController@show' )->name('note.show');

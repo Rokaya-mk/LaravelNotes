@@ -36,6 +36,7 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->created_at->diffForhumans() }}</td>
                         <td>
+
                             <a  class="text-success" href="{{route('note.show',['id'=> $item->id]) }}"> <i class="fas  fa-2x fa-eye"></i> </a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="{{route('note.edit',['id'=> $item->id])}}"> <i class="fas fa-2x fa-edit"></i>  </a>&nbsp;&nbsp;&nbsp;&nbsp;
