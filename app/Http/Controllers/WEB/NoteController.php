@@ -26,14 +26,12 @@ class NoteController extends Controller
         return view('notes.create');
     }
 
-
     public function store(Request $request)
     {
         $this->validate($request,[
             'title' =>  'required|string',
             'content' =>  'required'
         ]);
-
         $note = Note::create([
             'user_id' =>  Auth::id(),
             'title' =>  $request->title,
@@ -46,20 +44,27 @@ class NoteController extends Controller
 
     public function show($id)
     {
-        $note = Note::find($id);
+        // $note = Note::find($id);
         return view('notes.show' ,compact('note'));
     }
 
+    public function notesTrashed()
+    {
+        $notes = Note::onlyTrashed()->get();
+
+        return view('notes.trashed')->with('notes',$notes);
+    }
 
     public function edit($id)
     {
-        $note=Note::where('user_id',$id)->first();
+        //$note=Note::where('user_id',$id)->first();
+        $note = Note::findOrFail($id);
+       // dd($note);
         return view('notes.edit')->with('note',$note);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Note $note)
     {
-        $note=Note::find($id)->where('user_id',$id)->first();
         $this->validate($request,[
             'title'=>'required',
             'content'=> 'required'
@@ -73,14 +78,14 @@ class NoteController extends Controller
 
     public function destroy($id)
     {
-        $note=Note::where('user_id',$id)->first();
+        $note=Note::findOrFail($id);
         $note->forceDelete();;
         return redirect()->back();
     }
 
     public function softDelete($id)
     {
-        $note=Note::where('user_id',Auth::id())->first();
+        $note=Note::findOrFail($id);
 
         $note->delete($id);
 
@@ -89,14 +94,15 @@ class NoteController extends Controller
 
     public function deleteSoftDeleted( $id)
     {
-        $note = Note::withTrashed()->where('id',$id )->first() ;
+        $note = Note::withTrashed()->findOrFail($id ) ;
         $note->forceDelete();
         return redirect()->back() ;
     }
 
     public function restore( $id)
     {
-        $note = Note::withTrashed()->where('id', $id )->first() ;
+        // $note = Note::withTrashed()->where('id', $id )->first() ;
+        $note=Note::withTrashed()->findOrFail($id);
         $note->restore();
         return redirect()->back() ;
     }
