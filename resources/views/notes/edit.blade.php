@@ -26,7 +26,7 @@
 
 
       <div class="col">
-      <form action="{{route('note.update',$note->id)}}" method="Post">
+      <form action="{{route('notes.update',$note->id)}}" method="Post">
         @csrf
         @method('PUT')
             <div class="form-group">

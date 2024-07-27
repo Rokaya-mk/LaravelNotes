@@ -17,4 +17,9 @@ class Note extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    
+    public function getFormattedDate()
+    {
+        return $this->created_at->diffForhumans();
+    }
 }

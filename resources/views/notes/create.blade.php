@@ -26,7 +26,7 @@
 
 
       <div class="col">
-      <form action="{{route('note.store')}}" method="POST">
+      <form action="{{route('notes.store')}}" method="POST">
         @csrf
             <div class="form-group">
               <label for="exampleFormControlInput1">العنوان  </label>

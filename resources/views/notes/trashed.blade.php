@@ -32,8 +32,8 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->created_at->diffForhumans() }}</td>
                         <td>
-                            <a  class="text-success" href="{{route('note.restore',['id'=> $item->id])}}"> <i class="fas fa-2x fa-undo"></i> </a> &nbsp;&nbsp;
-                        <a class="text-danger" href="{{route('note.deleteSoft',['id'=> $item->id])}}"> <i class="fas  fa-2x fa-trash-alt"></i> </a>
+                            <a  class="text-success" href="{{route('notes.restore',['id'=> $item->id])}}"> <i class="fas fa-2x fa-undo"></i> </a> &nbsp;&nbsp;
+                        <a class="text-danger" href="{{route('notes.deleteSoft',['id'=> $item->id])}}"> <i class="fas  fa-2x fa-trash-alt"></i> </a>
                         </td>
                       </tr>
                     @endforeach

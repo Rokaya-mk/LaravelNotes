@@ -38,13 +38,13 @@ class NoteController extends Controller
             'content' =>   $request->content,
         ]);
 
-        return redirect()->back() ;
+        return redirect()->route("notes.index") ;
     }
 
 
     public function show($id)
     {
-        // $note = Note::find($id);
+         $note = Note::findOrFail($id);
         return view('notes.show' ,compact('note'));
     }
 
@@ -72,14 +72,14 @@ class NoteController extends Controller
         $note->title=$request->title;
         $note->content=$request->content;
         $note->save();
-        return redirect()->back();
+        return redirect()->route("notes.index");
     }
 
 
     public function destroy($id)
     {
         $note=Note::findOrFail($id);
-        $note->forceDelete();;
+        $note->forceDelete();
         return redirect()->back();
     }
 

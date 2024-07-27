@@ -20,18 +20,22 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/notes', 'App\Http\Controllers\Web\NoteController@index' )->name('notes');
 
-Route::get('/note/create', 'App\Http\Controllers\Web\NoteController@create' )->name('note.create');
-Route::post('/note/store', 'App\Http\Controllers\Web\NoteController@store' )->name('note.store');
-Route::get('/note/show/{id}', 'App\Http\Controllers\Web\NoteController@show' )->name('note.show');
-Route::get('/note/edit/{id}', 'App\Http\Controllers\Web\NoteController@edit' )->name('note.edit');
-Route::put('/note/update/{note}', 'App\Http\Controllers\Web\NoteController@update' )->name('note.update');
-Route::get('/note/destroy/{id}', 'App\Http\Controllers\Web\NoteController@destroy' )->name('note.destroy');
-Route::get('/note/softdelete/{id}', 'App\Http\Controllers\Web\NoteController@softDelete')->name('note.softDelete');
-Route::get('/note/deleteSoftDeleted/{id}', 'App\Http\Controllers\Web\NoteController@deleteSoftDeleted' )->name('note.deleteSoft');
-Route::get('/note/restore/{id}', 'App\Http\Controllers\Web\NoteController@restore' )->name('note.restore');
-Route::get('/notes/trashed', 'App\Http\Controllers\Web\NoteController@notesTrashed' )->name('notes.trashed');
 
+Route::get('/s/show/{id}', 'App\Http\Controllers\Web\NoteController@show' )->name('notes.show');
+Route::get('/notes/edit/{id}', 'App\Http\Controllers\Web\NoteController@edit' )->name('notes.edit');
+Route::put('/notes/update/{note}', 'App\Http\Controllers\Web\NoteController@update' )->name('notes.update');
+Route::get('/notes/destroy/{id}', 'App\Http\Controllers\Web\NoteController@destroy' )->name('notes.destroy');
+Route::get('/notes/softdelete/{id}', 'App\Http\Controllers\Web\NoteController@softDelete')->name('notes.softDelete');
+Route::get('/notes/deleteSoftDeleted/{id}', 'App\Http\Controllers\Web\NoteController@deleteSoftDeleted' )->name('notes.deleteSoft');
+
+
+Route::middleware('is_admin')->group(function(){
+    Route::get('/notes/create', 'App\Http\Controllers\Web\NoteController@create' )->name('notes.create');
+    Route::post('/notes/store', 'App\Http\Controllers\Web\NoteController@store' )->name('notes.store');
+    Route::get('/notes/restore/{id}', 'App\Http\Controllers\Web\NoteController@restore' )->name('notes.restore');
+    Route::get('/notes/trashed', 'App\Http\Controllers\Web\NoteController@notesTrashed' )->name('notes.trashed');
+});
